@@ -642,4 +642,4 @@ jobs:
 
 - 여러 개의 `terragrunt.hcl` 파일을 사용하다 보니, `terragrunt plan -out` 파일이 하나로 통일되지 않는다. 그러다 보니 `infracost`, `tf-summurize` 같은 테라폼 관련 오픈소스 도구를 사용할 때 불편함이 생겼다. 하나의 `terragrunt.hcl` 파일을 사용하는 것이 좋아보인다.
 - Dev/Prod 환경을 한 번의 커맨드로 생성하는 것은 놀라운 경험이었다. 그럼에도 불구하고, 여러 환경의 테라폼 코드를 작성하는 것은 어려운 일이다.
-- Terragrunt에서 강조하는 DRY는 쉽게 말하면 반복작업을 하지 말자는 주의인데, 크게 공감하였다. Terraform에서 모듈을 사용할 경우 변수를 child 모듈에도 넣고, 루트 모듈에 넣는다. 그리고 tfvars에서 변수값들을 설정해 주는데, Terragrunt에서는 variables 선언을 모듈에서만 하고,  `terragrunt.hcl` 구성파일에 바로 변수값을 넣어줌으로써 간소화된 절차를 보여준다.
+- Terragrunt에서 강조하는 DRY는 쉽게 말하면 반복작업을 하지 않는 것인데, 여기에 크게 공감하였다. Terraform에서 모듈을 사용할 경우 변수를 child 모듈에도 넣고, 루트 모듈에 넣는다. 그리고 tfvars에서 변수값들을 설정해 주는데, Terragrunt에서는 variables 선언을 모듈에서만 하고,  `terragrunt.hcl` 구성파일에 바로 변수값을 넣어줌으로써 간소화된 절차를 보여준다.

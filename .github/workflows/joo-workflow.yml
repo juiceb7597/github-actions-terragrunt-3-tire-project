@@ -1,0 +1,70 @@
+name: Terraform AWS Workflow
+on:
+  pull_request:
+    branches: [ main ]
+    paths: 
+      - 'joo/**'
+      - '.github/workflows/joo-workflow.yml'
+  push:
+    branches: [ main ]
+    paths: 
+      - 'joo/**'
+      - '.github/workflows/joo-workflow.yml'
+
+jobs:
+  tf_code_check: 
+    permissions: 
+      id-token: write
+      contents: read
+      pull-requests: write
+    env:
+      tg_version: 'v0.52.1'
+    environment: joo
+    defaults:
+      run:
+        working-directory: ./joo
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout tf code in runner environment 
+      uses: actions/checkout@v4
+
+    - name: Configure AWS Credentials Action For GitHub Actions
+      uses: aws-actions/configure-aws-credentials@v4
+      with: 
+        role-to-assume: ${{ secrets.AWS_ROLE }}
+        aws-region: ap-northeast-2
+
+    - name: Setup Terragrunt
+      run: |
+        mkdir bin
+        wget -O bin/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/$tg_version/terragrunt_linux_amd64
+        chmod +x bin/terragrunt
+        echo "$GITHUB_WORKSPACE/joo/bin" >> $GITHUB_PATH
+
+    - name: Terragrunt hclfmt
+      id: hclfmt
+      run: terragrunt hclfmt --terragrunt-check --terragrunt-diff
+      continue-on-error: true
+
+    - name: Terraform fmt
+      id: fmt
+      run: terraform fmt -check --recursive
+      continue-on-error: true
+
+    - name: Terragrunt validate
+      id: validate
+      run: terragrunt run-all validate --terragrunt-exclude-dir "**/.terragrunt-cache/**/*"
+
+    - name: Terragrunt plan
+      id: plan
+      run: terragrunt run-all plan --terragrunt-exclude-dir "**/.terragrunt-cache/**/*"
+
+    - name: Terragrunt apply
+      id: apply
+      if: github.event_name == 'push'
+      run: terragrunt run-all apply --terragrunt-exclude-dir "**/.terragrunt-cache/**/*" --terragrunt-non-interactive
+
+    - name: Terragrunt destroy
+      id: destroy
+      if: github.event_name == 'push'
+      run: terragrunt run-all destroy --terragrunt-exclude-dir "**/.terragrunt-cache/**/*" --terragrunt-non-interactive

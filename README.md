@@ -1,14 +1,13 @@
 # GitHub Actions Terragrunt 3-tire Project
-
----
+- GitHub Actions로 Terragrunt를 사용하여 AWS에 Dev/Prod 환경의 3-Tier 인프라를 배포하는 프로젝트.
 
 ## Terragrunt란?
 
 ![terragrunt-logo.png](https://i.esdrop.com/d/f/bPHSKWDXdc/MoGBoGgCLK.png)
 
-- Terraform의 확장으로 Terraform의 기본 기능에 추가적인 기능이 있는 오픈소스 도구이다
-- Container를 감싼 것이 Pod이듯이 Terraform을 감싸는 얇은 래퍼(Wrapper)라 불린다
-- 각 환경에 대한 구성 파일의 여러 복사본 대신 단일 소스에서 여러 환경에 대한 인프라를 생성하는 데 크게 도움이 된다
+- Terraform의 확장으로 Terraform의 기본 기능에 추가적인 기능이 있는 오픈소스 도구이다.
+- Container를 감싼 것이 Pod이듯이 Terraform을 감싸는 얇은 래퍼(Wrapper)라 불린다.
+- 각 환경에 대한 구성 파일의 여러 복사본 대신 단일 소스에서 여러 환경에 대한 인프라를 생성하는 데 크게 도움이 된다.
 
 ## Workflow
 
@@ -19,10 +18,10 @@
 ![terragrunt-source.png](https://i.esdrop.com/d/f/bPHSKWDXdc/6NTjbtWT36.png)
 
 - 해당 디렉터리로 이동한 다음 `terraform init` 명령어을 실행한다.
-- `terragrunt plan`은 해당 provider로 `terraform plan` 명령어을 실행한다 .
+- `terragrunt plan`은 해당 provider로 `terraform plan` 명령어을 실행한다.
 - `terragrunt apply`는 해당 provider로 `terraform apply` 명령어을 실행한다.
 - 내부적으로 Terraform 커맨드가 실행되기 때문에 Terragrunt를 얇은 래퍼(Wrapper)라고 부른다.
-- Terragrunt 구성 파일인  `terragrunt.hcl`의 hcl은 hashicorp configuration language을 의미하며 Terraform과 동일한 구문을 사용한다
+- Terragrunt 구성 파일인  `terragrunt.hcl`의 hcl은 hashicorp configuration language을 의미하며 Terraform과 동일한 구문을 사용한다.
 
 ### 기능
 
@@ -35,7 +34,7 @@
 - 여러 모듈의 Terraform 명령어을 한 번에 실행할 수 있다.
     - `terragrunt.hcl` 파일이 있는 모든 모듈에서 실행된다.
 - Auto-init
-    - `terragrunt apply` 명령어은 `terragrunt init` 명령어을 자동으로 실행한다
+    - `terragrunt apply` 명령어은 `terragrunt init` 명령어을 자동으로 실행한다.
 
 ### 도입 사례
 

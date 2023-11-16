@@ -3,7 +3,7 @@
 
 ## Terragrunt란?
 
-![terragrunt-logo.png](https://i.esdrop.com/d/f/bPHSKWDXdc/MoGBoGgCLK.png)
+![terragrunt-logo.png](https://i.esdrop.com/d/f/bPHSKWDXdc/37axlaLFeL.png)
 
 - Terraform의 확장으로 Terraform의 기본 기능에 추가적인 기능이 있는 오픈소스 도구이다.
 - Container를 감싼 것이 Pod이듯이 Terraform을 감싸는 얇은 래퍼(Wrapper)라 불린다.
